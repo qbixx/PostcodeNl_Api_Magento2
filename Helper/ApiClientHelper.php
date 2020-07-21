@@ -69,9 +69,12 @@ class ApiClientHelper extends AbstractHelper
             "base_url" => $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB),
             "debug" => $this->isDebugging(),
             "translations" => [
-                'flekto_nl_zip_label' => __('Postcode and house number'),
-                'flekto_nl_zip_placeholder' => __('1234AB 1'),
-                'flekto_nl_zip_warning' => __('Enter a postcode and house number.'),
+                'flekto_nl_zip_label' => __('Postcode'),
+                'flekto_nl_zip_placeholder' => __('1234AB'),
+                'flekto_nl_zip_warning' => __('Enter a postcode'),                
+                'flekto_nl_house_label' => __('House number'),
+                'flekto_nl_house_placeholder' => __('10'),
+                'flekto_nl_house_warning' => __('Enter House number.'),
             ]
         ];
 

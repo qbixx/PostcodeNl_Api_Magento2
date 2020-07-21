@@ -119,6 +119,14 @@ define([
                 var that = this;
                 var lookupTimeout = 0;
 
+
+
+
+           
+
+
+
+
                 this.fieldsScope.find('div[name$=".postcode"]')
                     .clone()
                     .removeAttr('data-bind')
@@ -142,11 +150,46 @@ define([
                     .addClass('flekto_nl_zip_input')
                     .val('');
 
+                $(inputEl).on('keyup', {scope: this}, this.delayGetNlPostcodeAddressZip);
+                $(inputEl).on('blur', {scope: this}, this.getNlPostcodeAddressZip);
+                $(inputEl).on('focus', function() {
+                    that.updateFocusForm(inputEl);
+                });
+
+
+
+console.log("I am here14");
+                    this.fieldsScope.find('div[name$=".city"]')
+                    .clone()
+                    .removeAttr('data-bind')
+                    .prop('id', 'flekto_nl_house_'+currentTimestamp)
+                    .prop('name', 'flekto_nl_house_'+currentTimestamp)
+                    .removeClass('_error')
+                    .addClass('flekto_nl_house')
+                    .insertBefore(this.fieldsScope.find('div[name$=".city"]'));
+
+                this.fieldsScope.find('.flekto_nl_house').find('.warning').remove();
+                this.fieldsScope.find('.flekto_nl_house').find('.field-error').remove();
+                this.fieldsScope.find('.flekto_nl_house').find('span').text(this.getTranslations().flekto_nl_house_label);
+
+
+                var inputEl = this.fieldsScope.find('#flekto_nl_house_'+currentTimestamp)
+                    .find('input')
+                    .attr('id', 'flekto_nl_house_input_'+currentTimestamp)
+                    .attr('name', 'flekto_nl_house_input')
+                    .attr('placeholder', this.getTranslations().flekto_nl_house_placeholder)
+                    .removeAttr('data-bind')
+                    .prop('disabled', false)
+                    .addClass('flekto_nl_house_input')
+                    .val('');
+
                 $(inputEl).on('keyup', {scope: this}, this.delayGetNlPostcodeAddress);
                 $(inputEl).on('blur', {scope: this}, this.getNlPostcodeAddress);
                 $(inputEl).on('focus', function() {
                     that.updateFocusForm(inputEl);
                 });
+
+
             }
         },
 
@@ -171,6 +214,48 @@ define([
             }, 750, event);
         },
 
+        delayGetNlPostcodeAddressZip: function (event) {
+
+            var that = event.data.scope;
+
+            that.logDebug('delayGetNlPostcodeAddress');
+
+            clearTimeout(that.lookupTimeout);
+            that.lookupTimeout = setTimeout(function() {
+                that.getNlPostcodeAddressZip(event);
+            }, 750, event);
+        },
+
+
+        getNlPostcodeAddressZip: function(event) {
+
+            var that = event.data.scope;
+
+            that.logDebug('getNlPostcodeAddress', event);
+
+            var input = jQuery(event.target);
+            var addressContainer = that.fieldsScope;
+            var query = input.val();
+
+            if (query.length < 6 || query.length > 6) {
+
+                // No postcode and house number found
+                if (!input.is(':focus')) {
+                    $(addressContainer).find('.postcodenl-address-autocomplete-warning').remove();
+                    input.after('<span class="postcodenl-address-autocomplete-warning">' + that.getTranslations().flekto_nl_zip_warning + '</span>');
+                }
+                return;
+            }
+            if (query.length == 6) {
+
+                // No postcode and house number found
+                if (!input.is(':focus')) {
+                    $(addressContainer).find('.postcodenl-address-autocomplete-warning').remove();
+                }
+                return;
+            }
+
+        },
 
         getNlPostcodeAddress: function(event) {
 
@@ -180,24 +265,33 @@ define([
 
             var input = jQuery(event.target);
             var addressContainer = that.fieldsScope;
-            var query = input.val();
-            var regex = /([1-9][0-9]{3}\s?[a-z]{2})\s?(\d+.*)/i;
-            var addressData = query.match(regex);
 
-            if (!addressData || addressData.length < 3) {
+
+
+            /*var query = input.val();
+            var regex = /([1-9][0-9]{3}\s?[a-z]{2})\s?(\d+.*)/i;
+            var addressData = query.match(regex);*/
+
+            /*if (!addressData || addressData.length < 3) {
 
                 // No postcode and house number found
                 if (query.length > 7 || !input.is(':focus')) {
                     $(addressContainer).find('.postcodenl-address-autocomplete-warning').remove();
-                    input.after('<span class="postcodenl-address-autocomplete-warning">' + that.getTranslations().flekto_nl_zip_warning + '</span>');
+                    input.after('<span class="postcodenl-address-autocomplete-warning">' + that.getTranslations().flekto_nl_house_warning + '</span>');
                 }
                 return;
-            }
+            }*/
 
             input.addClass('postcodenl-address-autocomplete-loading');
 
-            var postcode = addressData[1];
-            var houseNumber = addressData[2];
+            //var postcode = addressData[1];
+            //var houseNumber = addressData[2];
+
+            var postcode = $("input[name=flekto_nl_zip_input]").val();
+
+            var houseNumber = $("input[name=flekto_nl_house_input]").val();
+
+
             jQuery.get(that.getSettings().base_url+'rest/V1/flekto/postcode-international/nlzipcode/' + postcode + '/' + houseNumber, function(response) {
 
                 response = response[0];
