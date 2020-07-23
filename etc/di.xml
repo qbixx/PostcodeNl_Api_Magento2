@@ -2,6 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Flekto\Postcode\Api\PostcodeModelInterface" type="Flekto\Postcode\Model\PostcodeModel" />
     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
-		<plugin name="flat_no" type="Flekto\Customall\Plugin\Checkout\Model\LayoutProcessor" sortOrder="30"/>		
+		<plugin name="flat_no" type="Flekto\Postcode\Plugin\Checkout\Model\LayoutProcessor" sortOrder="30"/>		
 	</type>
 </config>
