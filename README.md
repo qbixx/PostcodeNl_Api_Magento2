@@ -15,10 +15,21 @@ Testing is free. After testing you can choose to purchase a subscription.
 Installation instructions
 =============
 
-1. Install this component using Composer: 
+1. Install this component using Composer:
+
+Add this repo to your composer file:
 
 ```bash
-$ composer require postcode-nl/api-magento2-module
+"repositories": {
+    "qbixx": {
+        "type": "git",
+        "url": "git@github.com:qbixx/PostcodeNl_Api_Magento2.git"
+    }
+}
+```
+
+```bash
+$ composer require qbixx/api-magento2-module
 ```
 
 2. Upgrade, compile & clear cache:
