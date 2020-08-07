@@ -158,7 +158,7 @@ define([
 
 
 
-console.log("I am here14");
+
                     this.fieldsScope.find('div[name$=".city"]')
                     .clone()
                     .removeAttr('data-bind')
@@ -172,6 +172,9 @@ console.log("I am here14");
                 this.fieldsScope.find('.flekto_nl_house').find('.field-error').remove();
                 this.fieldsScope.find('.flekto_nl_house').find('span').text(this.getTranslations().flekto_nl_house_label);
 
+                console.log("I am here15");
+                this.fieldsScope.find('div[name ="shippingAddress.postcode"]').last().hide();
+                
 
                 var inputEl = this.fieldsScope.find('#flekto_nl_house_'+currentTimestamp)
                     .find('input')
