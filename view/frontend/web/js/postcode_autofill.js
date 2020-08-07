@@ -166,7 +166,7 @@ console.log("I am here14");
                     .prop('name', 'flekto_nl_house_'+currentTimestamp)
                     .removeClass('_error')
                     .addClass('flekto_nl_house')
-                    .insertBefore(this.fieldsScope.find('div[name$=".city"]'));
+                    .insertBefore(this.fieldsScope.find('fieldset.street'));
 
                 this.fieldsScope.find('.flekto_nl_house').find('.warning').remove();
                 this.fieldsScope.find('.flekto_nl_house').find('.field-error').remove();

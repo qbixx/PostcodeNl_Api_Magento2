@@ -21,11 +21,12 @@ class LayoutProcessor
 
 
  /* All for shipping step */
- 		$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-                ['shippingAddress']['children']['shipping-address-fieldset']['children']['city']['sortOrder'] = 42;
-
+ 		
           $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-                ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['sortOrder'] = 43;
+                ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['sortOrder'] = 42;
+            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+                ['shippingAddress']['children']['shipping-address-fieldset']['children']['city']['sortOrder'] = 43;
+
 
 	
 		 $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -41,15 +42,17 @@ class LayoutProcessor
         ['payments-list']['children']['checkmo-form']['children']
         ['form-fields']['children']['city']['sortOrder'] = 41;
 
-            $jsLayout['components']['checkout']['children']['steps']['children']
+    $jsLayout['components']['checkout']['children']['steps']['children']
         ['billing-step']['children']['payment']['children']
         ['payments-list']['children']['checkmo-form']['children']
-        ['form-fields']['children']['buyer_block_no']['sortOrder'] = 42;
+        ['form-fields']['children']['street']['sortOrder'] = 42;
 
             $jsLayout['components']['checkout']['children']['steps']['children']
         ['billing-step']['children']['payment']['children']
         ['payments-list']['children']['checkmo-form']['children']
-        ['form-fields']['children']['street']['sortOrder'] = 43;
+        ['form-fields']['children']['buyer_block_no']['sortOrder'] = 43;
+
+            
 
             $jsLayout['components']['checkout']['children']['steps']['children']
         ['billing-step']['children']['payment']['children']
