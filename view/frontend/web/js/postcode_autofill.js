@@ -240,7 +240,7 @@ define([
             var addressContainer = that.fieldsScope;
             var query = input.val();
 
-            if (query.length < 6 || query.length > 6) {
+            if (query.length < 6 || query.length > 7) {
 
                 // No postcode and house number found
                 if (!input.is(':focus')) {
