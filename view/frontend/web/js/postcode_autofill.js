@@ -77,6 +77,15 @@ define([
 
                         } else {
 
+                            $('.form-shipping-address [name="city"]').attr("readonly", false);
+                            $('.form-shipping-address [name="street[0]"]').attr("readonly", false);
+                            $('.form-shipping-address [name="street[1]"]').attr("readonly", false);
+                            $('.form-shipping-address [name="street[2]"]').attr("readonly", false);
+                            $('.form-shipping-address [name="postcode"]').attr("readonly", false);         
+                            $('.form-shipping-address [name="region"]').attr("readonly", false);
+                            $('.form-shipping-address [name="region_id"]').attr("readonly", false);
+
+
                             if (jQuery.inArray($(dropdownEl).val(), countriesArr) !== -1) {
 
                                 that.logDebug('free input init');
@@ -304,6 +313,15 @@ define([
                 if (response.error && response.message_details) {
                     $(that.fieldsScope).find('.flekt_nl_zip_houseNumberAdditions').remove();
                     input.after('<span class="postcodenl-address-autocomplete-warning">' + response.message_details + '</span>');
+
+                     $('.form-shipping-address [name="city"]').attr("readonly", false);
+                    $('.form-shipping-address [name="street[0]"]').attr("readonly", false);
+                    $('.form-shipping-address [name="street[1]"]').attr("readonly", false);
+                    $('.form-shipping-address [name="street[2]"]').attr("readonly", false);
+                    $('.form-shipping-address [name="postcode"]').attr("readonly", false);         
+                    $('.form-shipping-address [name="region"]').attr("readonly", false);
+                    $('.form-shipping-address [name="region_id"]').attr("readonly", false);
+
                     return;
                 }
 
@@ -311,11 +329,15 @@ define([
                 that.logDebug(responseData);
 
                 $(addressContainer).find('[name="city"]').val(responseData.city).change();
+                $(addressContainer).find('[name="city"]').attr("readonly", true); 
                 $(addressContainer).find('[name="postcode"]').val(responseData.postcode).change();
+                $(addressContainer).find('[name="postcode"]').attr("readonly", true);
                 $(addressContainer).find('[name="region"]').val(responseData.province).change();
+                $(addressContainer).find('[name="region"]').attr("readonly", true);
 
                 var addressString = responseData.street + ' ' + responseData.houseNumber + (' ' + (responseData.houseNumberAddition ? responseData.houseNumberAddition : ''));
                 $(that.currentStreetElement).val(addressString).change();
+                $(that.currentStreetElement).attr("readonly", true);
 
                 if (responseData.houseNumberAdditions.length > 1) {
 
